@@ -1,5 +1,8 @@
 import json, sys, os
 
+# SUPERCUTTER
+# https://github.com/itsmeimtom/supercutter
+
 keywords = [
     "good size",
     "nice size",
@@ -21,7 +24,7 @@ subsFilePath = sys.argv[2]
 outputFolder = sys.argv[3]
  
 print("""
-SUPERCUTTER:
+!!SUPERCUTTER STARTING!!
 
 Video File: "%s"
 Subs  File: "%s"
@@ -71,3 +74,4 @@ for caption in subs[0]:
 
 # done with you now!!
 subsFile.close()
+print("!!SUPERCUTTER FINISHED!!")
