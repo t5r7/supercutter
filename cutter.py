@@ -1,4 +1,4 @@
-import json, sys, os
+import json, sys, os, re
 
 # SUPERCUTTER
 # https://github.com/itsmeimtom/supercutter
@@ -63,8 +63,9 @@ for caption in subs[0]:
         text = caption["text"]
         startTime = caption["start"]
         duration = caption["duration"]
-       
-        textClean = text.encode('ascii', 'ignore') # todo: make this more inclusive
+
+        textClean = text.replace(' ', '_') # swap spaces for underscores
+        textClean = re.sub(r'\W+', '', textClean) # todo: make this more inclusive
         outputFile = "%s/%s-%ssecs.mp4"%(outputFolder,textClean,duration)
 
         print("cutting segment that starts at %s, lasts %s seconds: '%s'"%(startTime, duration, text))
