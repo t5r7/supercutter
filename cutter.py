@@ -46,7 +46,7 @@ def hms(seconds):
 #       than using os.system
 def cut_segment(inputPath,startTime,duration,outputPath):
     startTime = hms(startTime)
-    os.system('ffmpeg -hide_banner -loglevel error -ss %s -i "%s" -t %s "%s" '%(startTime, inputPath, duration, outputPath))
+    os.system('ffmpeg -n -hide_banner -loglevel error -ss %s -i "%s" -t %s "%s" '%(startTime, inputPath, duration, outputPath))
 
 
 # loop over every caption in the subtitle file
@@ -62,7 +62,7 @@ for caption in subs[0]:
         duration = caption["duration"]
        
         textClean = text.encode('ascii', 'ignore') # todo: make this more inclusive
-        outputFile = "%s/%s.mp4"%(outputFolder,textClean)
+        outputFile = "%s/%s-%ssecs.mp4"%(outputFolder,textClean,duration)
 
         print("cutting segment that starts at %s, lasts %s seconds: '%s'"%(startTime, duration, text))
         cut_segment(videoFilePath, startTime, duration, outputFile)
