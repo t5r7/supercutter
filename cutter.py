@@ -1,4 +1,4 @@
-import json, sys, os, re, math
+import json, sys, os, re
 
 # SUPERCUTTER
 # https://github.com/itsmeimtom/supercutter
@@ -53,8 +53,8 @@ def hms(seconds):
 # todo: use python ffmpeg implementation rather
 #       than using os.system
 def cut_segment(inputPath,startTime,duration,outputPath):
-    startTime = hms(math.ceil(startTime))
-    duration = math.ceil(duration)
+    startTime = hms(round(startTime))
+    duration = round(duration)
     if(maxClipLength and duration > maxClipLength):
         print("skipping this one (over %s secs - is %s seconds long)"%(maxClipLength, duration))
         return # skip over long clips
