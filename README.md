@@ -3,6 +3,8 @@
 Extract segments from downloaded YouTube videos based on their captions.
 
 # How to Use
+Before starting, update the keywords at the top of `cutter.py`.
+
 
 ## For multiple videos
 1. Download videos using whichever method you prefer. I use [yt-dlp](https://github.com/yt-dlp/yt-dlp) since it has proven to be faster than youtube-dl.
