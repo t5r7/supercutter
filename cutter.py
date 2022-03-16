@@ -1,13 +1,18 @@
-import json, sys, os, re
+import json, sys, os, re, math
 
 # SUPERCUTTER
 # https://github.com/itsmeimtom/supercutter
 
+# words to clip segments of
 keywords = [
     "good size",
     "nice size",
-    "generous"
+    "generous",
+    "not just a"
 ]
+# segments longer than this
+# won't be exported
+maxClipLength = 6
 
 if(not sys.argv[1]):
     print("missing arg: video file")
@@ -48,8 +53,13 @@ def hms(seconds):
 # todo: use python ffmpeg implementation rather
 #       than using os.system
 def cut_segment(inputPath,startTime,duration,outputPath):
-    startTime = hms(startTime)
-    os.system('ffmpeg -n -hide_banner -loglevel error -ss %s -i "%s" -t %s "%s" '%(startTime, inputPath, duration, outputPath))
+    startTime = hms(math.ceil(startTime))
+    duration = math.ceil(duration)
+    if(maxClipLength and duration > maxClipLength):
+        print("skipping this one (over %s secs - is %s seconds long)"%(maxClipLength, duration))
+        return # skip over long clips
+    else:
+        os.system('ffmpeg -n -hide_banner -loglevel error -ss %s -i "%s" -t %s "%s" '%(startTime, inputPath, duration, outputPath))
 
 
 # loop over every caption in the subtitle file
